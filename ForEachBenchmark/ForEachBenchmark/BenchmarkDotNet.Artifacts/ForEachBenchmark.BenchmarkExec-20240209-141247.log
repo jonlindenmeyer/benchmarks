@@ -1,0 +1,49 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 3 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\git\ForEachBenchmark\bin\Release\net8.0\b5778b59-0ec2-4cd8-a0cb-153a17b7ee97
+// command took 3.04 sec and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\git\ForEachBenchmark\bin\Release\net8.0\b5778b59-0ec2-4cd8-a0cb-153a17b7ee97
+// command took 18.46 sec and exited with 1
+// start dotnet  build -c Release --no-restore --no-dependencies /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\git\ForEachBenchmark\bin\Release\net8.0\b5778b59-0ec2-4cd8-a0cb-153a17b7ee97
+// command took 6.93 sec and exited with 0
+// ***** Done, took 00:00:28 (28.53 sec)   *****
+// Found 3 benchmarks:
+//   BenchmarkExec.ExecuteForEach: DefaultJob
+//   BenchmarkExec.ExecuteForEachAsyncExtension: DefaultJob
+//   BenchmarkExec.ExecuteParallelForeach: DefaultJob
+
+Setup power plan (GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c FriendlyName: High performance)
+// **************************
+// Benchmark: BenchmarkExec.ExecuteForEach: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet b5778b59-0ec2-4cd8-a0cb-153a17b7ee97.dll --anonymousPipes 1252 1300 --benchmarkName ForEachBenchmark.BenchmarkExec.ExecuteForEach --job Default --benchmarkId 0 in C:\git\ForEachBenchmark\bin\Release\net8.0\b5778b59-0ec2-4cd8-a0cb-153a17b7ee97\bin\Release\net8.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.1 (8.0.123.58001), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 611400.00 ns, 611.4000 us/op
+WorkloadJitting  1: 1 op, 156266970900.00 ns, 156.2670 s/op
+
+WorkloadWarmup   1: 1 op, 156675563200.00 ns, 156.6756 s/op
+WorkloadWarmup   2: 1 op, 156515631900.00 ns, 156.5156 s/op
+WorkloadWarmup   3: 1 op, 156457805500.00 ns, 156.4578 s/op
+WorkloadWarmup   4: 1 op, 156671591600.00 ns, 156.6716 s/op
+WorkloadWarmup   5: 1 op, 156851953900.00 ns, 156.8520 s/op
+WorkloadWarmup   6: 1 op, 156813196000.00 ns, 156.8132 s/op
+WorkloadWarmup   7: 1 op, 156735307600.00 ns, 156.7353 s/op
+WorkloadWarmup   8: 1 op, 156420497300.00 ns, 156.4205 s/op
+WorkloadWarmup   9: 1 op, 156597729900.00 ns, 156.5977 s/op
+WorkloadWarmup  10: 1 op, 156487260600.00 ns, 156.4873 s/op
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 156795733500.00 ns, 156.7957 s/op
+WorkloadActual   2: 1 op, 156783008000.00 ns, 156.7830 s/op
+WorkloadActual   3: 1 op, 156664422100.00 ns, 156.6644 s/op
