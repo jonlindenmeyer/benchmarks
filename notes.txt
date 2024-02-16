@@ -1,0 +1,128 @@
+//List<int> scheduleStart = new List<int> { 1, 1, 2 };
+//List<int> scheduleEnd = new List<int> { 3, 2, 4};
+
+//List<int> scheduleStart = new List<int> {3, 1, 1, 2, 4};
+//List<int> scheduleEnd = new List<int>   {5, 3, 2, 4, 5};
+
+//List<(int start, int end, int size)> meetings = new List<(int start, int end, int size)>();
+
+//for (int i = 0; i < scheduleStart.Count; i++)
+//{
+//    (int start, int end, int size) meeting = new()
+//    {
+//        start = scheduleStart[i],
+//        end = scheduleEnd[i],
+//        size = scheduleEnd[i] - scheduleStart[i]
+//    };
+//    meetings.Add(meeting);
+//}
+
+//var agenda = new Dictionary<int, (int start, int end, int size)>();
+
+//// remove starts duplicateds
+//foreach (var item in meetings.OrderBy(x => x.start).ThenBy(x => x.size))
+//{
+//    try
+//    {
+//        agenda.Add(item.start, item);
+//    }
+//    catch (Exception)
+//    {
+
+//        //ignore
+//    }
+//}
+
+//// remove agenda conflicts
+
+
+
+//var count = agenda.Count;
+
+////public static int maxPresentations(List<int> scheduleStart, List<int> scheduleEnd)
+////{
+
+////}
+///
+
+//    List<int> scheduleStart = new List<int> { 1, 1, 1, 2, 4 };
+//    List<int> scheduleEnd = new List<int> { 4, 3, 2, 4, 5 };
+
+//    List<int> selectedMeetings = SelectNonOverlappingMeetings(scheduleStart, scheduleEnd);
+
+//    Console.WriteLine("Selected Meetings: " + string.Join(", ", selectedMeetings));
+
+
+//static List<int> SelectNonOverlappingMeetings(List<int> startTimes, List<int> endTimes)
+//{
+//    // Combine startTimes and endTimes into a list of tuples for easier sorting
+//    List<(int start, int end)> schedules = startTimes.Zip(endTimes, (start, end) => (start, end)).ToList();
+
+//    // Sort the schedules based on end times
+//    schedules.Sort((a, b) => a.end.CompareTo(b.end));
+
+//    List<int> selectedMeetings = new List<int>();
+//    int lastEndTime = 0;
+
+//    // Iterate through the sorted schedules and select non-overlapping meetings
+//    foreach ((int start, int end) in schedules)
+//    {
+//        if (start >= lastEndTime)
+//        {
+//            // Select the meeting if it doesn't overlap with previous meetings
+//            selectedMeetings.Add(schedules.IndexOf((start, end)) + 1);
+//            lastEndTime = end;
+//        }
+//    }
+
+//    return selectedMeetings;
+//}
+
+
+//var magazine = new List<string> { "give", "me", "one", "grand", "today", "night" };
+//var note = new List<string>     { "give", "me", "one", "grand"};
+
+//checkMagazine(magazine, note);
+
+//static void checkMagazine(List<string> magazine, List<string> note)
+//{
+//    if (note.Count > magazine.Count)
+//    {
+//        Console.Write("No");
+//        return;
+//    }
+
+//    while (note.Any())
+//    {
+//        var index = magazine.IndexOf(note[0]);
+//        if (index == -1)
+//        {
+//            Console.Write("No");
+//            return;
+//        }
+//        else
+//        {
+//            note.RemoveAt(0);
+//            magazine.RemoveAt(index);
+//        }
+//    }
+
+//    Console.Write("Yes");
+//}
+
+var s1 = "abc";
+var s2 = "cde";
+
+twoStrings(s1,s2);
+
+static string twoStrings(string s1, string s2)
+{
+	for (int i = 0; i < s1.Length; i++)
+	{
+		if (s2.Contains(s1[i]))
+		{
+			return "YES";
+		}
+	}
+    return "NO";
+}
