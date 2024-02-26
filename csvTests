@@ -1,0 +1,85 @@
+using CsvHelper;
+using System;
+using System.Collections.Concurrent;
+using System.Globalization;
+using AutoFixture;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+namespace Benchmark
+{
+    public class Tests
+    {
+        public async Task CheckFile()
+        {
+            
+            var keyIndex = 0;
+
+            string filePath = "seuarquivo.csv";
+            //GerarCSV(filePath, 1000000);
+
+            ConcurrentDictionary<string, string> dic = new ConcurrentDictionary<string, string>();
+            var listDuplicados = new List<string>();
+
+            var options = new ParallelOptions { MaxDegreeOfParallelism = 10 };
+
+            var ct = new CancellationToken();
+            Console.WriteLine($"Verificação concluída.{DateTime.Now.ToLongTimeString()}");
+            Console.WriteLine(dic.Count());
+
+            Console.WriteLine($"Verificação iniciada. {DateTime.Now.ToLongTimeString()}");
+            Parallel.ForEach(File.ReadLines(filePath), options, linha =>
+            {
+                string valorColuna = ExtrairColuna(linha, 0);
+
+                // Atômico: Incrementa a contagem para o valor da coluna
+                if(!dic.TryAdd(valorColuna, linha))
+                {
+                    listDuplicados.Add(linha);
+                }
+            });
+
+            Console.WriteLine($"Verificação concluída.{DateTime.Now.ToLongTimeString()}");
+            Console.WriteLine(dic.Count());
+        }
+
+        public string ExtrairColuna(string linha, int indiceColuna)
+        {
+            // Implemente a lógica para extrair a coluna desejada da linha
+            // Este é apenas um exemplo, ajuste conforme necessário
+            string[] colunas = linha.Split(',');
+            return colunas.Length > indiceColuna ? colunas[indiceColuna].Trim() : null;
+        }
+
+        static void GerarCSV(string filePath, int quantidadeLinhas)
+        {
+            var fixture = new Fixture();
+
+
+            List<DadosAleatorios> dados = new List<DadosAleatorios>();
+
+            for (int i = 0; i < quantidadeLinhas; i++)
+            {
+                dados.Add(new DadosAleatorios
+                {
+                    Barcode = fixture.Create<string>(),
+                    Type = "onhand",
+                    Quantity = fixture.Create<int>()
+                });
+            }
+
+            using (var writer = new StreamWriter(filePath))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                csv.WriteRecords(dados);
+            }
+        }
+
+        public class DadosAleatorios
+        {
+            public string Barcode { get; set; }
+            public string Type { get; set; }
+            public int Quantity { get; set; }
+        }
+
+    }
+}
